@@ -1,0 +1,12 @@
+{
+  "manifest_version": 2,
+  "name": "ituring toc",
+  "version": "1.0",
+  "description": "为图灵社区电子书显示章节目录",
+  "content_scripts": [
+    {
+      "matches": ["*://www.ituring.com.cn/book/tupubarticle/*"],
+      "js": ["script.js"]
+    }
+  ]
+}

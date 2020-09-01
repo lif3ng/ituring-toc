@@ -2,7 +2,8 @@ console.log("ituring toc loaded for: " + document.title);
 
 const headerSelector = ".side .block-header";
 const contentSelector = ".side .block-header + div ul";
-const articleHeaderSelector = "#article h2, #article h3";
+const articleHeaderSelector =
+  "#article h2, #article h3, #article li>p:first-child>strong:only-child";
 
 const scrollToId = (id) => {
   window.scrollTo({
@@ -72,7 +73,7 @@ hTags.forEach((tag) => {
     // level: Array.from(tagId).filter((x) => x === ".").length,
 
     // level by h tag level: <h2>, <h3> ...
-    level: tag.tagName[1],
+    level: tag.tagName === "STRONG" ? 5 : tag.tagName[1],
   });
 });
 
@@ -96,7 +97,11 @@ toggleButton.addEventListener("click", () => {
         li.setAttribute("style", "line-height:1");
         const span = document.createElement("span");
         const a = document.createElement("a");
-        a.innerHTML = "&nbsp; ".repeat(2 * (level - 1)) + text;
+        let prefix = "";
+        if (level === 5) {
+          prefix = "- ";
+        }
+        a.innerHTML = "&nbsp; ".repeat(2 * (level - 1)) + prefix + text;
         a.dataset.id = id;
         span.appendChild(a);
         li.appendChild(span);
